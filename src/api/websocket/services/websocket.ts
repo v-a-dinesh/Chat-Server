@@ -6,7 +6,7 @@ export default ({ strapi }) => ({
   initialize() {
     const io = new Server(strapi.server.httpServer, {
       cors: {
-        origin: "*",
+        origin: ["https://chat-client-ebon.vercel.app", "http://localhost:3000"],
         methods: ["GET", "POST"],
         allowedHeaders: ["content-type"],
         credentials: true
@@ -18,8 +18,7 @@ export default ({ strapi }) => ({
 
       socket.on('message', (message) => {
         console.log('Message received, echoing back:', message);
-        // Echo back to the specific client
-        setTimeout(() => {  // Added small delay to simulate response
+        setTimeout(() => {
           socket.emit('echo', message);
         }, 500);
       });
