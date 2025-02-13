@@ -1,8 +1,19 @@
+// config/middlewares.ts
+
 export default [
-  'strapi::logger',
   'strapi::errors',
   'strapi::security',
-  'strapi::cors',
+  'strapi::logger',
+  {
+    name: 'strapi::cors',
+    config: {
+      origin: ['http://localhost:3000', 'http://localhost:1337', '*'],
+      methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'HEAD', 'OPTIONS'],
+      headers: '*',
+      keepHeaderOnError: true,
+      credentials: true
+    }
+  },
   'strapi::poweredBy',
   'strapi::query',
   'strapi::body',
